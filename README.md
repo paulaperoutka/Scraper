@@ -1,2 +1,5 @@
 # Scraper
-Web app that lets users view and leave comments on the latest news. Uses Mongoose and Cheerio to scrape news. 
+
+Scraper is a web app that:
+	1) uses Mongoose and Cheerio to scrape news from third party websites
+	2) lets users view & leave comments on the latest scraped news
