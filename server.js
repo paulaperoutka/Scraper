@@ -47,8 +47,8 @@ app.get("/saved", function(req, res) {
 });
 
 // GET request to scrape Lonely Planet
-app.get("/scrape", function(req, res) {
-  request("https://www.lonelyplanet.com/search?q=destinations", function(error, response, html) {
+app.get("/scrape", (req, res) => {
+  request("https://www.lonelyplanet.com/search?q=destinations", (error, response, html) => {
     const $ = cheerio.load(html);
 
     $("article").each(function(i, element) {
@@ -60,45 +60,57 @@ app.get("/scrape", function(req, res) {
         if (fullImage) {
           result.image = fullImage.replace(/\?.*/,'');
         }
-
-      console.log(result.image);
-      var entry = new db.Article(result);
-      entry.save(function(err, doc) {
-        if (err) {
-          console.log(err);
-        }
         else {
-          console.log("DB Entries!" + doc);
+          result.image = "https://tinyurl.com/yaad4jet";
         }
+      // console.log(result);
+      db.Article.create(result)
+      .then(function(dbArticle) {
+        console.log(dbArticle);
+      })
+      .catch(function(err) {
+          return res.json(err);
       });
     });
-        res.send("Scrape complete.");
+    console.log("Scrape complete.");
+    res.redirect("/");
   });
 });
+//       var entry = new db.Article(result);
+//       entry.save(function(err, doc) {
+//         if (err) {
+//           console.log(err);
+//         }
+//         else {
+//           console.log("DB Entries!" + doc);
+//         }
+//       });
+//     });
+//     console.log("Scrape complete.");
+//   });
+// });
 
 // Get all articles scraped
 app.get("/articles", (req, res) => {
-  db.Article.find({}, (error, doc) => {
-    if (error) {
-      console.log(error);
-    }
-    else {
-      res.json(doc);
-    }
+  db.Article.find({})
+  .then((dbArticle) => {
+    res.json(dbArticle);
+  })
+  .catch((err) => {
+    res.json(err);
   });
 });
+
 
 // GET article by id
 app.get("/articles/:id", function(req, res) {
   db.Article.findOne({ "_id": req.params.id })
   .populate("notes")
-  .exec((error, doc) => {
-    if (error) {
-      console.log(error);
-    }
-    else {
-      res.json(doc);
-    }
+  .then(function(dbArticle) {
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    res.json(err);
   });
 });
 
@@ -115,7 +127,7 @@ app.post("/articles/save/:id", (req, res) => {
   });
 });
 
-// DELETE saved article, don't remove notes
+// DELETE saved article, don't remove notes?
 app.post("/articles/delete/:id", (req, res) => {
   db.Article.findOneAndUpdate({ "_id": req.params.id }, {"saved": false
     // , "notes": []
