@@ -1,3 +1,4 @@
+
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
@@ -32,14 +33,16 @@ app.set("view engine", "handlebars");
 // GET index handlebars
 app.get("/", (req, res) => {
   db.Article.find({"saved": false}, (error, data) => {
-    res.render("index", {articles: data});
+    res.render("index", {article: data});
   });
 });
 
 // GET saved handlebars
 app.get("/saved", function(req, res) {
-  db.Article.find({"saved": true}).populate("notes").exec((error, data) => {
-    res.render("saved", {articles: data});
+  db.Article.find({"saved": true})
+  .populate("notes")
+  .exec((error, data) => {
+    res.render("saved", {article: data});
   });
 });
 
@@ -57,7 +60,6 @@ app.get("/scrape", function(req, res) {
         if (fullImage) {
           result.image = fullImage.replace(/\?.*/,'');
         }
-      
 
       console.log(result.image);
       var entry = new db.Article(result);
@@ -86,7 +88,96 @@ app.get("/articles", (req, res) => {
   });
 });
 
+// GET article by id
+app.get("/articles/:id", function(req, res) {
+  db.Article.findOne({ "_id": req.params.id })
+  .populate("notes")
+  .exec((error, doc) => {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      res.json(doc);
+    }
+  });
+});
 
+// SAVE article
+app.post("/articles/save/:id", (req, res) => {
+  db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
+  .exec((err, doc) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// DELETE saved article, don't remove notes
+app.post("/articles/delete/:id", (req, res) => {
+  db.Article.findOneAndUpdate({ "_id": req.params.id }, {"saved": false
+    // , "notes": []
+  })
+  .exec(function(err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+
+// CREATE note
+app.post("/notes/save/:id", (req, res) => {
+  var newNote = new Note({
+    article: req.params.id,
+    body: req.body.text
+  });
+  console.log(req.body)
+  newNote.save((error, note) => {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      db.Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "notes": note } })
+      .exec(function(err) {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        }
+        else {
+          res.send(note);
+        }
+      });
+    }
+  });
+});
+
+// DELETE note
+app.delete("/notes/delete/:note_id/:article_id", (req, res) => {
+  db.Note.findOneAndRemove({ "_id": req.params.note_id }, (err) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      db.Article.findOneAndUpdate({ "_id": req.params.article_id }, {$pull: {"notes": req.params.note_id}})
+      .exec((err) => {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        }
+        else {
+          res.send("Note deleted.");
+        }
+      });
+    }
+  });
+});
 
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
