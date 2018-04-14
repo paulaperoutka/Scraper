@@ -33,7 +33,7 @@ app.set("view engine", "handlebars");
 // GET index handlebars
 app.get("/", (req, res) => {
   db.Article.find({"saved": false}, (error, data) => {
-    res.render("index", {article: data});
+    res.render("index", {articles: data});
   });
 });
 
@@ -42,7 +42,7 @@ app.get("/saved", function(req, res) {
   db.Article.find({"saved": true})
   .populate("notes")
   .exec((error, data) => {
-    res.render("saved", {article: data});
+    res.render("saved", {articles: data});
   });
 });
 
@@ -61,7 +61,7 @@ app.get("/scrape", (req, res) => {
           result.image = fullImage.replace(/\?.*/,'');
         }
         else {
-          result.image = "https://tinyurl.com/yaad4jet";
+          result.image = "https://posvudusha.files.wordpress.com/2012/07/lonely-planet-covers.jpg?w=494&h=232&crop=1";
         }
       // console.log(result);
       db.Article.create(result)

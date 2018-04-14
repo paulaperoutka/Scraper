@@ -1,0 +1,15 @@
+<div class="col-md-12">
+	<div class="card-columns">
+		{{#each articles}}
+			<div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src={{image}} alt="Card image cap">
+			  <div class="card-body">
+			    <h5 class="card-title">{{title}}</h5>
+			    <p class="card-text">{{summary}}</p>
+			    <a target="_blank" href={{link}} class="btn btn-primary">Travel here!</a>
+			    <button type="button" class="btn btn-info mx-auto save" data-id={{this._id}}>Save</button>
+			  </div>
+			</div>
+		{{/each}}
+	</div>
+</div>
