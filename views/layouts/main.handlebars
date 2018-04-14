@@ -14,11 +14,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- My Stylesheet -->
-		<link rel="stylesheet" href="../public/assets/css/style.css">
-		
+		<link rel="stylesheet" href="../../public/assets/css/style.css">
+
 </head>
 
 <body>
+
+	<nav class="navbar navbar-dark bg-dark">
+		<div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="/">Lonely Planet Scraper</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li><a href="/">Home</a></li>
+        <li><a href="/saved">Saved Articles</a></li>
+        <li><button type="button" class="btn btn-info" id="scrapeNew">Scrape New Articles</button></li>
+	    </ul>
+	  </div>
+	</nav>
+
+	<div class="jumbotron jumbotron-fluid">
+	  <div class="container" id="jumbo-container">
+	    <h1 class="display-4">Lonely Planet: The Latest</h1>
+	    <p class="lead">Check out the latest news &amp; articles from Lonely Planet.</p>
+	  </div>
+	</div>
 
 	{{{ body }}}
 
@@ -37,8 +57,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <!-- My JavaScript -->
-  <script type="text/javascript" src="assets/js/script.js"></script>
-
-	<script src="/assets/js/app.js"></script>
+	<script type="text/javascript" src="../../public/assets/js/app.js"></script>
 	
 </body>
