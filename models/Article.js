@@ -7,10 +7,6 @@ const ArticleSchema = new Schema ({
     type: String,
     required: true
   },
-  image: {
-    type: String, 
-    required: false
-  },
   summary: {
     type: String,
     required: true
@@ -19,6 +15,10 @@ const ArticleSchema = new Schema ({
     type: String,
     required: true
   }, 
+  image: {
+    type: String, 
+    required: false
+  },
   notes: [{
     type: Schema.Types.ObjectId,
     ref: "Note"
