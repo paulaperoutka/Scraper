@@ -29,7 +29,7 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// GET main handlebars
+// GET index handlebars
 app.get("/", (req, res) => {
   db.Article.find({"saved": false}, (error, data) => {
     res.render("index", {articles: data});
@@ -53,9 +53,13 @@ app.get("/scrape", function(req, res) {
       result.title = $(this).children(".styles__textContainer___JSbiH").children("a").children("h3").text();
       result.summary = $(this).children(".styles__textContainer___JSbiH").children("a").children("p").text();
       result.link = $(this).children(".styles__textContainer___JSbiH").children("a").attr("href");
-      result.image = $(this).children(".styles__thumbnail___2buk9").children("a").children("img").attr("src");
+      let fullImage = $(this).children(".styles__thumbnail___2buk9").children("a").children("img").attr("src");
+        if (fullImage) {
+          result.image = fullImage.replace(/\?.*/,'');
+        }
+      
 
-      // console.log(result);
+      console.log(result.image);
       var entry = new db.Article(result);
       entry.save(function(err, doc) {
         if (err) {
@@ -70,7 +74,17 @@ app.get("/scrape", function(req, res) {
   });
 });
 
-
+// Get all articles scraped
+app.get("/articles", (req, res) => {
+  db.Article.find({}, (error, doc) => {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      res.json(doc);
+    }
+  });
+});
 
 
 
