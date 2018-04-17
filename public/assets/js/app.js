@@ -30,3 +30,10 @@ $(".unsave").on("click", function () {
     window.location = "/saved";
   });
 });
+
+//Pop up modal
+$(".add-note").on("click", function () {
+  const thisArticle = $(this).attr("data-id");
+    console.log(thisArticle);
+  $("#modalNote"+thisArticle).modal();
+});

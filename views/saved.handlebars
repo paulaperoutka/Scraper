@@ -13,14 +13,14 @@
                 <button type="button" class="btn btn-secondary mx-auto add-note" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Notes</button>
               </div>
           {{/each}}
-        {{else}}
-          <div class="card">
-            <div class="card-header">Get reading!</div>
-            <div class="card-body">
-              <h5 class="card-title">You haven't saved anything yet.</h5>
-              <a href="/" class="btn btn-info">Explore</a>
-            </div>
+      {{else}}
+        <div class="card">
+          <div class="card-header">Get reading!</div>
+          <div class="card-body">
+            <h5 class="card-title">You haven't saved anything yet.</h5>
+            <a href="/" class="btn btn-info">Explore</a>
           </div>
+        </div>
       {{/if}}
     </div>
   </div>
