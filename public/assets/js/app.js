@@ -10,7 +10,7 @@ $("#scrape").on("click", () => {
 });
 
 //Save, no ES6, this = window b/c of scope inheritance
-$(".save").on("click", function () {
+$(".save-article").on("click", function () {
   let thisArticle = $(this).attr("data-id");
   $.ajax({
     method: "POST",
@@ -21,7 +21,7 @@ $(".save").on("click", function () {
 });
 
 //Unsave, no ES6
-$(".unsave").on("click", function () {
+$(".unsave-article").on("click", function () {
   const thisArticle = $(this).attr("data-id");
   $.ajax({
     method: "POST",
@@ -32,8 +32,38 @@ $(".unsave").on("click", function () {
 });
 
 //Pop up modal
-$(".add-note").on("click", function () {
+$(".notes-btn").on("click", function () {
   const thisArticle = $(this).attr("data-id");
     console.log(thisArticle);
   $("#modalNote"+thisArticle).modal();
 });
+
+$(".add-note").on("click", function () {
+  const thisArticle = $(this).attr("data-id");
+  console.log(thisArticle);
+
+
+  if(!$(".form-control").val()) {
+    console.log("No text!");
+  } else {
+    // console.log($(".form-control").val());
+    $.ajax({
+      method: "POST",
+      url: "/notes/save/" + thisArticle,
+      data: {
+        text: $(".form-control").val()
+      }
+    }).done(function(data) {
+      console.log(data);
+      $(".form-control").val("");
+      // window.location = "/saved";
+    });
+  }
+});
+
+// $(".delete-note").on("click", function () {
+  // const thisNote = $(this).attr("note-id");
+//   console.log(thisNote);
+// });
+
+

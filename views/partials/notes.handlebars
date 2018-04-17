@@ -11,18 +11,40 @@
         {{!-- Add Notes Here --}}
         {{#if notes}}
           {{#each notes}}
-
+            <div class="card border-info mb-3">
+              <div class="card-body">
+                {{this.body}}
+                <button type="button" class="btn btn-danger delete-note" note-id={{this._id}} article-id={{this.article}}>X</button>
+              </div>
+            </div>
           {{/each}}
 
         {{else}}
-        
+          <div class="card border-info mb-3">
+            <div class="card-body">
+              There are no notes for this article...yet!
+            </div>
+          </div>
         {{/if}}
+        <div class="card border-info mb-3">
+          <div class="card-body">
+            <textarea id="noteText{{this._id}}" class="form-control" rows="2" placeholder="Add a note..."></textarea>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-info add-note" data-id={{this._id}}>Add</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+
+{{!-- <div class="card border-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body text-info">
+    <h5 class="card-title">Info card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div> --}}
 

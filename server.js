@@ -115,7 +115,7 @@ app.get("/articles/:id", function(req, res) {
 });
 
 // SAVE article
-app.post("/articles/save/:id", (req, res) => {
+app.post("/notes/save/:id", (req, res) => {
   db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
   .exec((err, doc) => {
     if (err) {
@@ -144,22 +144,22 @@ app.post("/articles/delete/:id", (req, res) => {
 
 
 // CREATE note
-app.post("/notes/save/:id", (req, res) => {
+app.post("/articles/save/:id", (req, res) => {
   var newNote = new Note({
     article: req.params.id,
     body: req.body.text
   });
-  console.log(req.body)
+  console.log(req.body);
   newNote.save((error, note) => {
     if (error) {
       console.log(error);
     }
     else {
       db.Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "notes": note } })
-      .exec(function(err) {
-        if (err) {
-          console.log(err);
-          res.send(err);
+      .exec((error) => {
+        if (error) {
+          console.log(error);
+          res.send(error);
         }
         else {
           res.send(note);
