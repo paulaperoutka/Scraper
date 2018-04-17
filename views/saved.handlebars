@@ -9,7 +9,7 @@
                 <h5 class="card-title">{{title}}</h5>
                 <p class="card-text">{{summary}}</p>
                 <a target="_blank" href={{link}} class="btn btn-primary">Visit</a>
-                <button type="button" class="btn btn-dark mx-auto delete" data-id={{this._id}}>Unsave</button>
+                <button type="button" class="btn btn-dark mx-auto unsave" data-id={{this._id}}>Unsave</button>
                 <button type="button" class="btn btn-secondary mx-auto add-note" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Notes</button>
               </div>
           {{/each}}
@@ -18,7 +18,7 @@
             <div class="card-header">Get reading!</div>
             <div class="card-body">
               <h5 class="card-title">You haven't saved anything yet.</h5>
-              <a href="/" class="btn btn-info">Go somewhere</a>
+              <a href="/" class="btn btn-info">Explore</a>
             </div>
           </div>
       {{/if}}
