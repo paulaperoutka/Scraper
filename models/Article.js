@@ -27,7 +27,6 @@ const ArticleSchema = new Schema ({
     type: Boolean,
     default: false
   }, 
-  unique: true
 });
 
 const Article = mongoose.model("Article", ArticleSchema);
