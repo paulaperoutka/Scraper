@@ -145,7 +145,7 @@ app.post("/articles/delete/:id", (req, res) => {
 
 // CREATE note
 app.post("/articles/save/:id", (req, res) => {
-  var newNote = new Note({
+  var newNote = new db.Note({
     article: req.params.id,
     body: req.body.text
   });
