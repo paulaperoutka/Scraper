@@ -1,4 +1,44 @@
-.jumbotron {
+body {
+	font-family: 'Cabin Sketch', cursive;
 	background-image: url("https://tinyurl.com/y8p9lfky");
-	color: white;
+/*	background-image: url("https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	color: darkslategray;
+}
+
+.navbar {
+	color: darkslategray;
+}
+
+.navbar-brand {
+	font-family: 'Fredericka the Great', cursive;
+	font-size: 24px;
+}
+
+#navbarNav {
+	font-size: 18px;
+}
+
+#scrape {
+	margin-left: 5px;
+}
+
+.jumbotron {
+/*	background-image: url("https://tinyurl.com/y8p9lfky");*/
+	color: lightyellow;
+/*	font-family: "Kranky", cursive;*/
+	font-family: 'Fredericka the Great', cursive;
+	background-color: black;
+	opacity: .9;
+}
+
+.container {
+
+}
+
+.card {
+	border-width: 2px;
+	border-color: lightyellow;
+	opacity: .98;
 }

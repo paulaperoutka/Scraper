@@ -74,19 +74,6 @@ app.get("/scrape", (req, res) => {
     res.redirect("/");
   });
 });
-//       var entry = new db.Article(result);
-//       entry.save(function(err, doc) {
-//         if (err) {
-//           console.log(err);
-//         }
-//         else {
-//           console.log("DB Entries!" + doc);
-//         }
-//       });
-//     });
-//     console.log("Scrape complete.");
-//   });
-// });
 
 // Get all articles scraped
 app.get("/articles", (req, res) => {
