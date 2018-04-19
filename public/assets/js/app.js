@@ -38,28 +38,28 @@ $(".notes-btn").on("click", function () {
   $("#modalNote"+thisArticle).modal();
 });
 
-$(".add-note").on("click", function () {
-  const thisArticle = $(this).attr("data-id");
-  console.log(thisArticle);
+// $(".add-note").on("click", function () {
+//   const thisArticle = $(this).attr("data-id");
+//   console.log(thisArticle);
 
 
-  if(!$(".form-control").val()) {
-    console.log("No text!");
-  } else {
-    // console.log($(".form-control").val());
-    $.ajax({
-      method: "POST",
-      url: "/notes/save/" + thisArticle,
-      data: {
-        text: $(".form-control").val()
-      }
-    }).done(function(data) {
-      console.log(data);
-      $(".form-control").val("");
-      // window.location = "/saved";
-    });
-  }
-});
+//   if(!$(".form-control").val()) {
+//     console.log("No text!");
+//   } else {
+//     // console.log($(".form-control").val());
+//     $.ajax({
+//       method: "POST",
+//       url: "/notes/save/" + thisArticle,
+//       data: {
+//         text: $(".form-control").val()
+//       }
+//     }).done(function(data) {
+//       console.log(data);
+//       $(".form-control").val("");
+//       // window.location = "/saved";
+//     });
+//   }
+// });
 
 // $(".delete-note").on("click", function () {
   // const thisNote = $(this).attr("note-id");
