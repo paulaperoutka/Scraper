@@ -1,4 +1,3 @@
-
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
@@ -16,9 +15,7 @@ var PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+mongoose.connect(MONGODB_URI);
 
 const app = express();
 
@@ -33,7 +30,7 @@ app.set("view engine", "handlebars");
 // GET index handlebars
 app.get("/", (req, res) => {
   db.Article.find({"saved": false}, (error, data) => {
-    res.render("index", { articles: data });
+    res.render("index", {articles: data});
   });
 });
 
@@ -42,7 +39,7 @@ app.get("/saved", function(req, res) {
   db.Article.find({"saved": true})
   .populate("notes")
   .exec((error, data) => {
-    res.render("saved", { articles: data });
+    res.render("saved", {articles: data});
   });
 });
 
@@ -115,7 +112,7 @@ app.get("/articles/:id", function(req, res) {
 });
 
 // SAVE article
-app.post("/notes/save/:id", (req, res) => {
+app.post("/articles/save/:id", (req, res) => {
   db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
   .exec((err, doc) => {
     if (err) {
@@ -144,8 +141,8 @@ app.post("/articles/delete/:id", (req, res) => {
 
 
 // CREATE note
-app.post("/articles/save/:id", (req, res) => {
-  var newNote = new db.Note({
+app.post("/notes/save/:id", (req, res) => {
+  var newNote = new Note({
     article: req.params.id,
     body: req.body.text
   });

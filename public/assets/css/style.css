@@ -1,3 +1,4 @@
-#jumbo-container {
+.jumbotron {
 	background-image: url("https://tinyurl.com/y8p9lfky");
+	color: white;
 }
