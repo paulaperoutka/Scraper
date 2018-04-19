@@ -34,16 +34,16 @@ $(".unsave-article").on("click", function () {
 //Pop up modal
 $(".notes-btn").on("click", function () {
   const thisArticle = $(this).attr("data-id");
-    console.log(thisArticle);
+  console.log("Getting notes attached to article: " + thisArticle);
   $("#modalNote"+thisArticle).modal();
 });
 
 $(".add-note").on("click", function () {
   const thisArticle = $(this).attr("data-id");
-  console.log(thisArticle);
+  console.log($("#noteText" + thisArticle).val());
 
 
-  if(!$(".form-control").val()) {
+  if(!$("#noteText" + thisArticle).val()) {
     console.log("No text!");
   } else {
     // console.log($(".form-control").val());
@@ -51,19 +51,32 @@ $(".add-note").on("click", function () {
       method: "POST",
       url: "/notes/save/" + thisArticle,
       data: {
-        text: $(".form-control").val()
+        text: $("#noteText" + thisArticle).val()
       }
     }).done(function(data) {
       console.log(data);
       $(".form-control").val("");
-      // window.location = "/saved";
+      // $("#modalNote" + thisArticle).modal("hide");
+      window.location = "/saved";
     });
   }
 });
 
 $(".delete-note").on("click", function () {
   const thisNote = $(this).attr("note-id");
-  console.log(thisNote);
+  const thisArticle = $(this).attr("article-id");
+
+  console.log("Note id: " + thisNote + " for article: " + thisArticle);
+
+  $.ajax({
+    method: "DELETE",
+    url: "/notes/delete/" + thisNote + "/" + thisArticle
+  }).done((data) => {
+    console.log(data);
+    // $("#modalNote" + thisArticle).modal("hide");
+    // $("#modalNote" + thisArticle).modal();
+    window.location="/saved";
+  });
 });
 
 

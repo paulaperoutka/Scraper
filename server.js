@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 const db = require("./models");
+let Note = db.Note;
 
 const request = require("request");
 const cheerio = require("cheerio");
@@ -93,8 +94,8 @@ app.get("/articles", (req, res) => {
   .then((dbArticle) => {
     res.json(dbArticle);
   })
-  .catch((err) => {
-    res.json(err);
+  .catch((error) => {
+    res.json(error);
   });
 });
 
@@ -106,8 +107,8 @@ app.get("/articles/:id", function(req, res) {
   .then(function(dbArticle) {
     res.json(dbArticle);
   })
-  .catch(function(err) {
-    res.json(err);
+  .catch(function(error) {
+    res.json(error);
   });
 });
 
