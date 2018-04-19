@@ -61,7 +61,7 @@ app.get("/scrape", (req, res) => {
         else {
           result.image = "https://posvudusha.files.wordpress.com/2012/07/lonely-planet-covers.jpg?w=494&h=232&crop=1";
         }
-      // console.log(result);
+          // console.log(result);
       db.Article.create(result)
       .then(function(dbArticle) {
         console.log(dbArticle);
