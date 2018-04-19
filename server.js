@@ -33,7 +33,7 @@ app.set("view engine", "handlebars");
 // GET index handlebars
 app.get("/", (req, res) => {
   db.Article.find({"saved": false}, (error, data) => {
-    res.render("index", {articles: data});
+    res.render("index", { articles: data });
   });
 });
 
@@ -42,7 +42,7 @@ app.get("/saved", function(req, res) {
   db.Article.find({"saved": true})
   .populate("notes")
   .exec((error, data) => {
-    res.render("saved", {articles: data});
+    res.render("saved", { articles: data });
   });
 });
 
