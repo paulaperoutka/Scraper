@@ -1,9 +1,9 @@
 <div class="container"> 
   <div class="col-md-12">
+    <div class="card-columns">
       {{#if articles}}
-        <div class="card-columns">
         {{#each articles}}
-          <div class="card" style="width: 18rem;">
+          <div class="card article-card" style="width: 18rem;">
             <img class="card-img-top" src={{image}} alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{title}}</h5>
@@ -12,8 +12,7 @@
               <button type="button" class="btn btn-dark mx-auto unsave-article" data-id={{this._id}}>Unsave</button>
               <button type="button" class="btn btn-secondary mx-auto notes-btn" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Notes</button>
             </div>
-          </div>
-        {{/each}}
+          {{/each}}
         {{else}}
           <div class="card">
             <div class="card-header">Get reading!</div>
@@ -24,6 +23,7 @@
           </div>
         </div>
       {{/if}}
+    </div>
   </div>
 </div>
 

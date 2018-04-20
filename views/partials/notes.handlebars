@@ -18,7 +18,6 @@
               </div>
             </div>
           {{/each}}
-
         {{else}}
           <div class="card border-info mb-3">
             <div class="card-body">
@@ -26,15 +25,14 @@
             </div>
           </div>
         {{/if}}
-        {{!-- <div class="card border-info mb-3"> --}}
           <div class="card-body">
-            <textarea id="note{{this._id}}" class="form-control" rows="2" placeholder="Add a note..."></textarea>
+            <textarea id="noteText{{this._id}}" class="form-control" rows="2" placeholder="Add a note..."></textarea>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info add-note" data-id={{this._id}}>Add</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info add-note" data-id={{this._id}}>Add</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>

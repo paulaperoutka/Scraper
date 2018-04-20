@@ -46,7 +46,7 @@ $(".add-note").on("click", function () {
   if(!$("#noteText" + thisArticle).val()) {
     console.log("No text!");
   } else {
-    // console.log($(".form-control").val());
+    console.log($("#noteText" + thisArticle).val());
     $.ajax({
       method: "POST",
       url: "/notes/save/" + thisArticle,
@@ -54,8 +54,8 @@ $(".add-note").on("click", function () {
         text: $("#noteText" + thisArticle).val()
       }
     }).done(function(data) {
-      console.log(data);
-      $(".form-control").val("");
+      // console.log(data);
+      $("#noteText" + thisArticle).val("");
       // $("#modalNote" + thisArticle).modal("hide");
       window.location = "/saved";
     });
